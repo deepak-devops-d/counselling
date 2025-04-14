@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.9'
 
 services:
@@ -7,4 +8,20 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+=======
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+>>>>>>> a4d419d (Initial commit)
 
