@@ -1,13 +1,18 @@
-# Use official Tomcat image
-FROM tomcat:9.0
+# Base image
+FROM node:18-alpine
 
-# Remove default web apps
-RUN rm -rf /usr/local/tomcat/webapps/*
+# Working directory
+WORKDIR /app
 
-# Copy WAR file into webapps
-COPY sample.war /usr/local/tomcat/webapps/ROOT.war
+# Copy dependencies first
+COPY package*.json ./
+RUN npm install
 
-EXPOSE 8080
+# Copy the rest of the app
+COPY . .
 
-CMD ["catalina.sh", "run"]
+# Expose port
+EXPOSE 5000
 
+# Start command
+CMD ["node", "index.js"]
